@@ -1,21 +1,49 @@
-SpreePromoImage
-===============
+Spree Promo Image
+=================
 
-Introduction goes here.
+Adds a simple image upload field to Spree::Promotion (using Paperclip of course!).
 
 
-Example
-=======
+Installation
+------------
 
-Example goes here.
+    gem 'spree_promo_image', :github => 'nebirhos/spree_promo_image'
+    rails g spree_promo_image:install
+
+then in your view:
+
+```ruby
+@promotion.image.attachment.url
+```
+
+
+Configuration
+-------------
+
+As usual you can override the default image styles with a decorator (app/models/promotion_image_decorator.rb):
+
+```ruby
+Spree::PromotionImage.class_eval do
+  attachment_definitions[:attachment][:styles] = {
+    :mini => '48x48#',
+    :normal => '300x300>',
+    :large => '940x300>'
+  }
+end
+```
+
+Tip: if you use [spree_editor](https://github.com/spree/spree_editor)
+you can enable a wysiwyg editor for the promotion description field:
+
+```ruby
+Spree::EditorConfiguration.class_eval do
+  preference :ids, :text, :default => 'product_description page_body promotion_description'
+end
+```
+
 
 Testing
 -------
+No test yet, please forgive me :(
 
-Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.
-
-    $ bundle
-    $ bundle exec rake test_app
-    $ bundle exec rspec spec
-
-Copyright (c) 2012 [name of extension creator], released under the New BSD License
+Copyright (c) 2012 nebirhos, released under the New BSD License

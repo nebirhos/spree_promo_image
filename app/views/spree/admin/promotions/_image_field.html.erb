@@ -1,0 +1,14 @@
+<% f.object.build_image unless f.object.image %>
+
+<%= f.field_container :image do %>
+  <%= f.label :image %><br/>
+  <%= f.fields_for :image do |image_form| %>
+    <% if !image_form.object.new_record? %>
+      <%= image_tag(image_form.object.attachment.url(:mini)) %>
+      <%= link_to_remove_fields t("remove"), image_form %>
+      <br />
+    <% end %>
+
+    <%= image_form.file_field :attachment %>
+  <% end %>
+<% end %>
