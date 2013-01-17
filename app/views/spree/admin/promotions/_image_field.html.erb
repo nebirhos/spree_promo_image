@@ -1,5 +1,7 @@
 <% @promotion.build_image if !@promotion.image %>
 
+<%# FIXME: disable upload for new records  %>
+<%- unless @promotion.new_record? %>
 <%= f.field_container :image do %>
   <%= f.label :image %><br/>
 
@@ -12,4 +14,5 @@
 
     <%= image_form.file_field :attachment %>
   <% end %>
+<% end %>
 <% end %>
